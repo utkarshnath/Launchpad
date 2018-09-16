@@ -1,0 +1,17 @@
+************ Class questions ***************
+
+1. simple interest
+2. largest of three numbers
+3. print 10 numbers in form of AP
+4. print 1 - N number
+5. read 5 numbers and print their average
+6. given N, find sum of even numbers till N
+7. check if N is prime or not
+8. find largest of N numbers
+9. pattern printing
+10. given N, find mean, max, min values  
+11. check if given number is in the fibo series or not
+12. pattern printing
+13. another pattern printing
+14. another pattern 
+15. given N, find sum of it's digits
