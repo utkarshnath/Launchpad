@@ -1,17 +1,295 @@
-************ Class questions ***************
+#include<iostream>
+using namespace std;
+//pass by reference
+void update(int *x){
+    cout<<"update x"<<endl;
+    (*x)++;
+    //*x = (*x)+1;
+    return;
+}
+int main(){
+int x;
+x = 10;
+cout<<&x<<endl;
 
-1. simple interest
-2. largest of three numbers
-3. print 10 numbers in form of AP
-4. print 1 - N number
-5. read 5 numbers and print their average
-6. given N, find sum of even numbers till N
-7. check if N is prime or not
-8. find largest of N numbers
-9. pattern printing
-10. given N, find mean, max, min values  
-11. check if given number is in the fibo series or not
-12. pattern printing
-13. another pattern printing
-14. another pattern 
-15. given N, find sum of it's digits
+int a[] = {1,2,3};
+cout<<a<<endl;
+cout<<&a<<endl;
+cout<<&a[0]<<endl;
+cout<<&a[1]<<endl; // this has to be address + 4
+// arrays take linear continous memory
+
+//pointers stores address of other variable
+
+int * xptr = &x;
+cout<<xptr<<endl;
+cout<<&x<<endl;
+cout<<x<<endl;
+
+//ask this
+cout<<&xptr<<endl; // address of the pointer bucket
+int **xxptr = &xptr;
+cout<<xxptr<<endl;
+// double pointer
+
+char ch = 'A';
+cout<<ch<<endl;
+cout<<&ch<<endl;
+// when ever cout gets address of a char variable then it print values at
+// it's consecutive address till is gets null character, we have seen the same in case of char array
+
+// so to print address of char we have to fool the compiler
+cout<<(int*)&ch<<endl;
+cout<<(void*)&ch<<endl;
+
+//assigning wrong pointer
+int *cptr = (int*)&ch;
+cout<<cptr<<endl;
+cout<<cptr+1<<endl; // should have moved 1 byte ahead, but will move 4 bytes
+
+// we should never do such thing
+
+
+//Derefrence operator
+int x = 10;
+int *y = &x;
+//tell these outputs
+cout<<x<<endl;
+cout<<&x<<endl;
+cout<<y<<endl;
+cout<<&y<<endl;
+cout<<*y<<endl;
+cout<<*(&y)<<endl;
+cout<<*(&x)<<endl;
+
+//pointers assignment
+int z = 10;
+y = &z;
+
+// never dereference a garbage address
+int * random;
+cout<<*random<<endl;
+// can lead to two things
+// give garbage value
+// give runtime error, by pointing to an address outside program memory
+
+//pointer and function
+int x = 10
+update(&x);
+
+
+//array and pointers
+int arr[] = {1,2,3};
+void f(int * ptr){
+    cout<<*ptr<<endl;
+}
+// we can pass array into this function as, both are address
+
+// try size of operator, inside function and in main
+
+
+// reference variable
+int x = 10;
+int &y = x;
+// two names for same variable
+// this variable must be initialized
+// and we can't change the reference i.e can't be reassigned
+
+//give example of a function
+
+
+// don't return address of a local variable from function
+// because that memory won't exit after function call is finished
+// it will either return 0 or a memory address with garbage value in it
+
+}
+
+
+
+
+
+
+
+
+
+// Introduction structure
+// Input output
+#include<iostream>
+using namespace std;
+// student structure is only defined, no memory is allocated at this time
+struct student{
+    char name[100];
+    int age;
+    char gender;
+};
+int main(){
+    //created an object
+    student s1;
+    //use dot operator
+    // input values to object
+    cin.getline(s1.name,100);
+    s1.age = 23;
+    s1.gender = 'M';
+
+    // output values from object
+    cout<<s1.name<<endl;
+    cout<<s1.age<<endl;
+    cout<<s1.gender<<endl;
+    
+    
+    can also give example with an array
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// introduce constructors
+#include<iostream>
+using namespace std;
+struct student{
+    char name[100];
+    int age;
+    char gender;
+
+    /*
+    student(){
+        "I am default constructor"
+    }
+    */
+    // this overrides default constructor
+    student(){
+        cout<<"I am constructor"<<endl;
+        name[0] = 'R';
+        name[1] = 'A';
+        name[2] = 'M';
+        name[3] = '\0';
+        age = 20;
+        gender = 'M';
+    }
+    student(char arr[100],int a){
+        cout<<"I am 2nd constructor"<<endl;
+        int i;
+        for(i=0;arr[i];i++){
+            name[i] = arr[i];
+        }
+        name[i] = '\0';
+        age = a;
+        gender = 'M';
+    }
+    student(char arr[100],int a,char g){
+        cout<<"I am 3rd constructor"<<endl;
+        int i;
+        for(i=0;arr[i];i++){
+            name[i] = arr[i];
+        }
+        name[i] = '\0';
+        age = a;
+        gender = g;
+    }
+};
+int main(){
+    student s1("ABC",65,'F');
+    cout<<s1.name<<endl;
+    cout<<s1.age<<endl;
+    cout<<s1.gender<<endl;
+    // they currently have garbage values
+    // now introduce constructors
+    cin.getline(s1.name,100);
+    s1.age = 23;
+    s1.gender = 'M';
+
+    cout<<s1.name<<endl;
+    cout<<s1.age<<endl;
+    cout<<s1.gender<<endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// pointers in structures
+// arrow notation
+#include<iostream>
+using namespace std;
+struct address{
+    char street_address[100];
+    int pincode;
+    address(){
+        cout<<"constructor"<<endl;
+    }
+};
+struct student{
+    char name[100];
+    int age;
+    char gender;
+    address* adr;
+    student* bestfriend;
+    student(char arr[100]){
+        int i;
+        for(i=0;arr[i];i++){
+            name[i] = arr[i];
+        }
+        name[i] = '\0';
+        age = 30;
+        gender = 'M';
+        adr = NULL;
+        bestfriend = NULL;
+    }
+};
+void print_student(student s){
+    cout<<s.name<<endl;
+    cout<<s.age<<endl;
+    cout<<s.gender<<endl;
+    //star and dot
+    cout<<(*s.adr).pincode<<endl;
+    //arrow notation
+    cout<<(s.adr)->pincode<<endl;
+    cout<<(*s.bestfriend).name<<endl;
+    cout<<s.bestfriend->name<<endl;
+}
+int main(){
+    student s("RAM");
+    student s1("SHYM");
+    // created object using static memory allocation
+    address adr;
+    s.adr = &adr;
+
+    // created object using dynamic memory allocation
+    address * adr1 = new address;
+    s.adr = adr1;
+
+
+    student *temp;
+    temp = new student[10];
+    temp[0]->age
+    (*temp).age = 10;
+    temp->age = 20;
+
+    student* best_friend = new student("Shyam");
+    s.bestfriend = best_friend;
+    s.bestfriend = &s1;
+    print_student(s);
+}
+
+
+
+
+
+
+
